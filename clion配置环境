@@ -1,0 +1,93 @@
+1、准备工作
+安装C/C++插件
+
+
+
+C/C++插件.png
+2、[⇧⌘P]打开命令模式，选择[C/Cpp: Edit Configurations(JSON)]命令，回车后会自动生成一个.vscode目录，目录下有一个c_cpp_properties.json文件，如下所示：
+
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
+3、[⇧⌘P]打开命令模式，选择[Tasks: Configure Task]命令，选择的模板为MSBuild，回车后会自动在.vscode目录下生成一个tasks.json文件：
+
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "msbuild",
+            "args": [
+                // Ask msbuild to generate full paths for file names.
+                "/property:GenerateFullPaths=true",
+                "/t:build",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
+4、[⇧⌘P]打开命令模式，选择[Debug: Open launch.json]命令，选择的模板为C/C++，回车后会自动在.vscode目录下生成一个launch.json文件：
+
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "enter program name, for example ${workspaceFolder}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+    ]
+}
+完成这三步C++开发环境就配置好了，接下来就可以编译，运行，调试C++程序了
+
+5、安装「Code Runner」插件
+
+
+
+Code Runner.png
+[⇧⌘P]打开命令模式选择「run code」运行项目
+
+运行代码
+右键-> 「run code」
+
+作者：小村医
+链接：https://www.jianshu.com/p/6e481ea7da47
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
